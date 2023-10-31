@@ -1,5 +1,5 @@
 library(tidyverse)
-
+library(ggplot2)
 EMDAT
 data_1<-EMDAT
 data_list<- list(
@@ -29,29 +29,30 @@ data.Indonesia<-data_1%>%
 data.Pakistan<-data_1%>%
   dplyr::filter(Entity =="Pakistan")
 data("data.China")
-data.China%>%
-  ggplot(aes(x=total_affected_all_disasters, y=Entity))+
+plot.China<-data.China%>%
+  ggplot(aes(x=Year, y=total_affected_all_disasters))+
   geom_point()+
   labs(title = "China affected by all disasters",
-       y="China")
-data.Haiti%>%
-  ggplot(aes(x=total_affected_all_disasters, y=Entity))+
+       y="damages intensity")
+plot.Haiti<-data.Haiti%>%
+  ggplot(aes(x=Year, y=total_affected_all_disasters))+
   geom_point()+
   labs(title = "Haiti affected by all disasters",
-       y="Haiti")
-data.Italy%>%
-  ggplot(aes(x=total_affected_all_disasters, y=Entity))+
+       y="damages intensity")
+plot.Italy<-data.Italy%>%
+  ggplot(aes(x=Year, y=total_affected_all_disasters))+
   geom_point()+
   labs(title = "Italy affected by all disasters",
-       y="Italy")
-data.Indonesia%>%
-  ggplot(aes(x=total_affected_all_disasters, y=Entity))+
+       y="damages intensity")
+plot.Indonesia<-data.Indonesia%>%
+  ggplot(aes(x=Year, y=total_affected_all_disasters))+
   geom_point()+
   labs(title = "Indonesia affected by all disasters",
-       y="Indonesia")
-data.Pakistan%>%
-  ggplot(aes(x=total_affected_all_disasters, y=Entity))+
-  geom_point()+
+       y="damages intensity")
+plot.Pakistan<-data.Pakistan%>%
+  ggplot(aes(x=Year, y=total_affected_all_disasters))+
+  geom_point()+ 
   labs(title = "Pakistan affected by all disasters",
-       y="Pakistan")
+       y="damages intensity")
+plots_grid <- gridExtra::grid.arrange(plot.China,plot.Haiti,plot.Italy,plot.Indonesia,plot.Pakistan, ncol = 2) 
 
